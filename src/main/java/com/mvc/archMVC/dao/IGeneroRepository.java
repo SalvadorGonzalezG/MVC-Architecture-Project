@@ -10,5 +10,5 @@ public interface IGeneroRepository {
 	public void save(Genero Genero);
 	
 	//Search for a genre by its ID
-	public String findById(Long id);
+	public Genero findById(int id);
 }
