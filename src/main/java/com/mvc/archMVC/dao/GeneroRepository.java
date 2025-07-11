@@ -1,15 +1,17 @@
-package com.mvc.archMVC.dao;
+/*package com.mvc.archMVC.dao;
 
 import org.springframework.stereotype.Repository;
 
 import com.mvc.archMVC.entities.Genero;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 @Repository
 public class GeneroRepository implements IGeneroRepository{
 
+	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@Override
@@ -24,4 +26,4 @@ public class GeneroRepository implements IGeneroRepository{
 		return entityManager.find(Genero.class, id); // Search by ID using JPA
 	}
 	
-}
+}*/
