@@ -19,14 +19,15 @@ public class PeliculaController {
 	public PeliculaController(IPeliculaService peliculaService) {
 		this.peliculaService = peliculaService;
 	}
-	@PostMapping("/pelicula")
+	@GetMapping("/pelicula")
 	public String crear(Model model) {
 		Pelicula pelicula = new Pelicula();
 		model.addAttribute("pelicula", pelicula);
+		//model.addAttribute("genero", );
 		model.addAttribute("titulo", "Nueva Pelicula");
 		return "pelicula";
 	}
-	@GetMapping
+	@GetMapping("/pelicula/{id}")
 	public String editar(@PathVariable (name="id") int id, Model model) {
 		Pelicula pelicula = new Pelicula();
 		model.addAttribute("pelicula", pelicula);
