@@ -13,6 +13,6 @@ public interface IPeliculaService {
 	
 	public void delete(int id);
 	
-	public List<Pelicula> findA();
+	public List<Pelicula> findAll();
 
 }
