@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -28,6 +31,7 @@ public class Pelicula implements Serializable{
 	private String nombre;
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_estreno")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaEstreno;
 	private Genero genero;
 	@OneToMany
@@ -43,6 +47,7 @@ public class Pelicula implements Serializable{
 	public Date getFechaEstreno() {
 		return fechaEstreno;
 	}
+	@OneToOne
 	public Genero getGenero() {
 		return genero;
 	}

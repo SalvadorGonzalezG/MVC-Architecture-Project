@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.mvc.archMVC.entities.Pelicula;
 import com.mvc.archMVC.services.IGeneroService;
@@ -36,6 +37,17 @@ public class PeliculaController {
 		model.addAttribute("pelicula", pelicula);
 		model.addAttribute("titulo", "Editar Pelicula");
 		return "pelicula";
+	}
+	
+	@PostMapping("/pelicula")
+	public String guardar(Pelicula pelicula) {
+		peliculaService.create(pelicula);
+		return "redirect:home";
+	}
+	
+	@GetMapping({"/", "/home", "/index"})
+	public String home() {
+		return "home";
 	}
 	
 	
