@@ -27,7 +27,7 @@ public class PeliculaController {
 	public String crear(Model model) {
 		Pelicula pelicula = new Pelicula();
 		model.addAttribute("pelicula", pelicula);
-		model.addAttribute("genero", generoService.findAll()); //Trasladamos generos a la vista Para implementarlo en un select
+		model.addAttribute("generos", generoService.findAll()); //Trasladamos generos a la vista Para implementarlo en un select
 		model.addAttribute("titulo", "Nueva Pelicula");
 		return "pelicula";
 	}
