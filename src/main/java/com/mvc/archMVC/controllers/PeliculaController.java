@@ -16,6 +16,8 @@ public class PeliculaController {
 	
 	@Autowired
 	private IPeliculaService peliculaService;
+	
+	@Autowired
 	private IGeneroService generoService;
 	
 	
@@ -42,7 +44,7 @@ public class PeliculaController {
 	@PostMapping("/pelicula")
 	public String guardar(Pelicula pelicula) {
 		peliculaService.create(pelicula);
-		return "redirect:home";
+		return "redirect:/home";
 	}
 	
 	@GetMapping({"/", "/home", "/index"})
