@@ -37,6 +37,7 @@ public class PeliculaController {
 	public String editar(@PathVariable (name="id") int id, Model model) {
 		Pelicula pelicula = new Pelicula();
 		model.addAttribute("pelicula", pelicula);
+		model.addAttribute("generos", generoService.findAll());
 		model.addAttribute("titulo", "Editar Pelicula");
 		return "pelicula";
 	}
