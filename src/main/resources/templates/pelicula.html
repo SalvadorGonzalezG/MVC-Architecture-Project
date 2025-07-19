@@ -28,13 +28,27 @@
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Genero</label>
 				<div class="col-sm-10">
 					<select class="form-select" th:field="*{genero}">
-						<option th:each="genero : ${generos}" 
-								th:text="${genero.nombre}" 
-								th:value="${genero.id}">
+						<option th:each="genero : ${generos}" th:text="${genero.nombre}" th:value="${genero.id}">
 						</option>
 					</select>
 				</div>
 			</div>
+			<div class="row mb-3">
+				<label for="protagonista" class="col-sm-2 col-form-label">Actor</label>
+				<div class="col-sm-10">
+					<select class="form-select" th:field="*{protagonista}">
+						<option th:text="'Seleccionar Actor'" th:value="0" onchange="actorSelected(this)"></option>
+						<option th:each="actor : ${actores}" th:text="${actor.nombre}" th:value="${actor.id}"
+							th:data-url="${actor.urlImagen}">
+						</option>
+					</select>
+				</div>
+			</div>
+			
+			<input id="ids" name="ids" type="text">
+			
+			<div id="protagonistas_container"></div>
+			
 			<button type="submit" class="btn btn-primary flont-end">Sign in</button>
 		</form>
 
