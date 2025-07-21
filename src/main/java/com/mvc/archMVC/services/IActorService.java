@@ -10,6 +10,6 @@ public interface IActorService {
 	public List<Actor> findAll();
 	
 	// Method regresar una lista de todos los Actores en base a todos los ids que le mande
-	public List<Actor> findAllById(Integer ids);
+	public List<Actor> findAllById(List<Integer> ids );
 
 }

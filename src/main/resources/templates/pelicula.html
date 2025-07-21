@@ -1,10 +1,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:insert="layouts/head">
+<head th:insert="~{layouts/head :: head}">
 </head>
 
 <body>
-	<header th:insert="layouts/header">
+	<header th:insert="~{layouts/header :: header}">
 	</header>
 
 	<div class="container">
@@ -36,8 +36,8 @@
 			<div class="row mb-3">
 				<label for="protagonista" class="col-sm-2 col-form-label">Actor</label>
 				<div class="col-sm-10">
-					<select class="form-select" th:field="*{protagonista}">
-						<option th:text="'Seleccionar Actor'" th:value="0" onchange="actorSelected(this)"></option>
+					<select class="form-select" th:field="*{protagonista}" onchange="actorSelected(this)">
+						<option th:text="'Seleccionar Actor'" th:value="0"></option>
 						<option th:each="actor : ${actores}" th:text="${actor.nombre}" th:value="${actor.id}"
 							th:data-url="${actor.urlImagen}">
 						</option>
@@ -47,7 +47,7 @@
 			
 			<input id="ids" name="ids" type="text">
 			
-			<div id="protagonistas_container"></div>
+			<div id="protagonistas_container" class="row"></div>
 			
 			<button type="submit" class="btn btn-primary flont-end">Sign in</button>
 		</form>

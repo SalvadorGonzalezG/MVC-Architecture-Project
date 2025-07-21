@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.mvc.archMVC.entities.Pelicula;
+import com.mvc.archMVC.services.IActorService;
 import com.mvc.archMVC.services.IGeneroService;
 import com.mvc.archMVC.services.IPeliculaService;
 
@@ -20,6 +21,9 @@ public class PeliculaController {
 	@Autowired
 	private IGeneroService generoService;
 	
+	@Autowired
+	private IActorService actorService;
+	
 	
 	public PeliculaController(IPeliculaService peliculaService, IGeneroService generoService) {
 		this.peliculaService = peliculaService;
@@ -30,6 +34,7 @@ public class PeliculaController {
 		Pelicula pelicula = new Pelicula();
 		model.addAttribute("pelicula", pelicula);
 		model.addAttribute("generos", generoService.findAll()); //Trasladamos generos a la vista Para implementarlo en un select
+		model.addAttribute("actores", actorService.findAll());
 		model.addAttribute("titulo", "Nueva Pelicula");
 		return "pelicula";
 	}
@@ -38,6 +43,7 @@ public class PeliculaController {
 		Pelicula pelicula = new Pelicula();
 		model.addAttribute("pelicula", pelicula);
 		model.addAttribute("generos", generoService.findAll());
+		model.addAttribute("actores", actorService.findAll());
 		model.addAttribute("titulo", "Editar Pelicula");
 		return "pelicula";
 	}
