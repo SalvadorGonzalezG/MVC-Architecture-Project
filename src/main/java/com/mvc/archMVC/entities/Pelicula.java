@@ -16,6 +16,8 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="pelicula")
@@ -28,12 +30,15 @@ public class Pelicula implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotEmpty()
 	private String nombre;
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_estreno")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull()
 	private Date fechaEstreno;
 	@OneToOne
+	@NotNull()
 	private Genero genero;
 	@OneToMany
 	private List<Actor> protagonista;
