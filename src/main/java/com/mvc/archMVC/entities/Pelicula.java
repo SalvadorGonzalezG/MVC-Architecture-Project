@@ -30,7 +30,7 @@ public class Pelicula implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotEmpty()
+	@NotEmpty(message = "El nombre es obligatorio")
 	private String nombre;
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_estreno")
@@ -74,7 +74,7 @@ public class Pelicula implements Serializable{
 	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
-	public void setProtagonistas(List<Actor> protagonista) {
+	public void setProtagonista(List<Actor> protagonista) {
 		this.protagonista = protagonista;
 	}
 	

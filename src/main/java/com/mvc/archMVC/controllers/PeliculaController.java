@@ -54,19 +54,23 @@ public class PeliculaController {
 		model.addAttribute("pelicula", pelicula);
 		model.addAttribute("generos", generoService.findAll());
 		model.addAttribute("actores", actorService.findAll());
+		model.addAttribute("pelicula", peliculaService.findById(id));
 		model.addAttribute("titulo", "Editar Pelicula");
 		return "pelicula";
 	}
 	
 	@PostMapping("/pelicula")
-	public String guardar(@Valid Pelicula pelicula, BindingResult br, @ModelAttribute(name="ids") String ids) {
+	public String guardar(@Valid Pelicula pelicula, BindingResult br, @ModelAttribute(name="ids") String ids, Model model) {
 		
 		if(br.hasErrors()) {
-			return "/pelicula";
+			model.addAttribute("generos", generoService.findAll());
+	        model.addAttribute("actores", actorService.findAll());
+	        model.addAttribute("titulo", "Nueva Película");
+			return "pelicula";
 		}
 		List<Integer> idsProtagonistas = Arrays.stream(ids.split(",")).map(Integer::parseInt).collect(Collectors.toList());
 		List<Actor> protagonistas = (List<Actor>) actorService.findAllById(idsProtagonistas);
-		pelicula.setProtagonistas(protagonistas);
+		pelicula.setProtagonista(protagonistas);
 		peliculaService.create(pelicula);
 		return "redirect:/home";
 	}

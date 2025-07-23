@@ -15,25 +15,42 @@
 			<div class="row mb-3">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Nombre</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="nombre" th:field="*{nombre}">
-					<div class="invalid-feed" th:if="${#fields.hashError('nombre')}" th:errors="*{nombre}"></div>
+					<input type="text" class="form-control" 
+							id="nombre" 
+							th:field="*{nombre}"
+							th:classappend="${#fields.hasErrors('nombre')} ? ' is-invalid'">
+					<div class="invalid-feedback" 
+							th:if="${#fields.hasErrors('nombre')}" 
+							th:errors="*{nombre}">Nombre invalido</div>
 				</div>
 			</div>
 			<div class="row mb-3">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Fecha de estreno</label>
 				<div class="col-sm-10">
-					<input type="date" class="form-control" id="fecha_estreno" th:field="*{fechaEstreno}">
-					<div class="invalid-feed" th:if="${#fields.hashError('fechaEstreno')}" th:errors="*{fechaEstreno}"></div>
+					<input type="date" class="form-control" 
+						   id="fecha_estreno" 
+						   th:field="*{fechaEstreno}"
+						   th:classappend="${#fields.hasErrors('fechaEstreno')} ? ' is-invalid'">
+					<div class="invalid-feedback" 
+						   th:if="${#fields.hasErrors('fechaEstreno')}" 
+						   th:errors="*{fechaEstreno}">Fecha Invalida</div>
 				</div>
 			</div>
 			<div class="row mb-3">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Genero</label>
 				<div class="col-sm-10">
-					<select class="form-select" th:field="*{genero}">
-						<option th:each="genero : ${generos}" th:text="${genero.nombre}" th:value="${genero.id}">
+					<select class="form-select" 
+							th:field="*{genero}"
+							th:classappend="${#fields.hasErrors('genero')} ? ' is-invalid'">
+						<option value="">Selecciona un Género</option>
+						<option th:each="genero : ${generos}" 
+							th:text="${genero.nombre}" 
+							th:value="${genero.id}">
 						</option>
 					</select>
-					<div class="invalid-feed" th:if="${#fields.hashError('genero')}" th:errors="*{genero}"></div>
+					<div class="invalid-feedback" 
+						 th:if="${#fields.hasErrors('genero')}" 
+						 th:errors="*{genero}">Genero Invalido</div>
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -41,14 +58,16 @@
 				<div class="col-sm-10">
 					<select class="form-select" th:field="*{protagonista}" onchange="actorSelected(this)">
 						<option th:text="'Seleccionar Actor'" th:value="0"></option>
-						<option th:each="actor : ${actores}" th:text="${actor.nombre}" th:value="${actor.id}"
-							th:data-url="${actor.urlImagen}">
+						<option th:each="actor : ${actores}" 
+								th:text="${actor.nombre}" 
+								th:value="${actor.id}"
+								th:data-url="${actor.urlImagen}">
 						</option>
 					</select>
 				</div>
 			</div>
 			
-			<input id="ids" name="ids" type="text">
+			<input id="ids" name="ids" type="hidden">
 			
 			<div id="protagonistas_container" class="row"></div>
 			
