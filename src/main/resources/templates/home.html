@@ -12,12 +12,12 @@
 			<div class="row row-cols-1 row-cols-md-3 g-4">
 			  <div class="col" th:each="pelicula : ${peliculas}">
 			    <div class="card">
-			      <img src="..." class="card-img-top" alt="...">
+			      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpMj9739FdqLR-ooOwg9qoQdP2vbiJd4JVRw&s" class="card-img-top" alt="foto">
 			      <div class="card-body">
 			        <h5 class="card-title" th:text="${pelicula.nombre}">Card title</h5>
 			        <p class="card-text" th:text="${pelicula.genero}"></p>
-					<div class="catalogo-actor-container" th:each="protagonista : ${protagonistas}">
-						<div class="catalogo-actor-imagen" th:text="${protagonista.urlImagen}">
+					<div class="catalogo-actor-container" th:each="protagonista : ${pelicula.protagonista}">
+						<div class="catalogo-actor-imagen" th:style="|background-image:url(' ${protagonista.urlImagen}')|">
 							
 							
 						</div>

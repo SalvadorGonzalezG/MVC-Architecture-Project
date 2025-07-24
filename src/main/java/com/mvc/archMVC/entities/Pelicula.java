@@ -11,8 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -37,10 +37,10 @@ public class Pelicula implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull()
 	private Date fechaEstreno;
-	@OneToOne
+	@ManyToOne
 	@NotNull()
 	private Genero genero;
-	@OneToMany
+	@ManyToMany
 	private List<Actor> protagonista;
 	
 	// getters
@@ -53,7 +53,6 @@ public class Pelicula implements Serializable{
 	public Date getFechaEstreno() {
 		return fechaEstreno;
 	}
-	@OneToOne
 	public Genero getGenero() {
 		return genero;
 	}
