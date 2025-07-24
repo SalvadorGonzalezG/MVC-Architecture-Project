@@ -21,4 +21,10 @@
 	    </div>
 	  </div>
 	</nav>
+	<div th:if="${msj != null}" 
+	     th:text="${msj}" 
+	     th:class="|alert ${tipoMsj != null ? 'alert-' + tipoMsj : ''}|">
+	</div>
+
+
 </header>

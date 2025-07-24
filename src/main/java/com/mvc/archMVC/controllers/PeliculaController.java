@@ -76,7 +76,10 @@ public class PeliculaController {
 	}
 	
 	@GetMapping({"/", "/home", "/index"})
-	public String home() {
+	public String home(Model model) {
+		model.addAttribute("peliculas", peliculaService.findAll());
+		model.addAttribute("msj", "Catalogo");
+		model.addAttribute("tipoMsj", "success");
 		return "home";
 	}
 	
