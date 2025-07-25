@@ -43,6 +43,9 @@ public class Pelicula implements Serializable{
 	@ManyToMany
 	private List<Actor> protagonista;
 	
+	//Campo qie tendra URL de la imagen
+	public String imagen;
+	
 	// getters
 	public int getId() {
 		return id;
@@ -58,6 +61,9 @@ public class Pelicula implements Serializable{
 	}
 	public List<Actor> getProtagonista(){
 		return protagonista;
+	}
+	public String getImagen() {
+		return imagen;
 	}
 	
 	//setters
@@ -75,6 +81,9 @@ public class Pelicula implements Serializable{
 	}
 	public void setProtagonista(List<Actor> protagonista) {
 		this.protagonista = protagonista;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 	
 	
