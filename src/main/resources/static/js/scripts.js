@@ -52,8 +52,23 @@ function eliminarActor(btn){
 	
 	$("#protagonista option[value='"+id+ "']" ).prop("disabled", false);
 	$(node).remove();
-
 }
+
+// Funcion que permitira previsualizar una imagen seleccionada por el usuario
+function previsualizador(){
+	var reader = new FileReader();
+
+// Se lee el archivo seleccionado en el input
+	reader.readAsDataURL(document.getElementById("imagen"). files[0])
+	
+	reader.onload = function(e){
+		var vista = document.getElementById("vista_previa");
+		vista.classList.remove("d-none");
+		vista.style.backgroundImage = 'url("' + e.target.result + '")';
+	}
+}
+
+
 
 
 
