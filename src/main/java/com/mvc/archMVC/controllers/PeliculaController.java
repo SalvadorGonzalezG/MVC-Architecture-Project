@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mvc.archMVC.entities.Actor;
 import com.mvc.archMVC.entities.Pelicula;
 import com.mvc.archMVC.services.IActorService;
+import com.mvc.archMVC.services.IArchivoService;
 import com.mvc.archMVC.services.IGeneroService;
 import com.mvc.archMVC.services.IPeliculaService;
 
@@ -33,11 +36,15 @@ public class PeliculaController {
 	@Autowired
 	private IActorService actorService;
 	
+	@Autowired
+	private IArchivoService archivoService;
 	
-	public PeliculaController(IPeliculaService peliculaService, IGeneroService generoService, IActorService actorService) {
+	
+	public PeliculaController(IPeliculaService peliculaService, IGeneroService generoService, IActorService actorService, IArchivoService archivoService) {
 		this.peliculaService = peliculaService;
 		this.generoService = generoService;
 		this.actorService = actorService;
+		this.archivoService = archivoService;
 	}
 	@GetMapping("/pelicula")
 	public String crear(Model model) {
@@ -60,13 +67,16 @@ public class PeliculaController {
 	}
 	
 	@PostMapping("/pelicula")
-	public String guardar(@Valid Pelicula pelicula, BindingResult br, @ModelAttribute(name="ids") String ids, Model model) {
+	public String guardar(@Valid Pelicula pelicula, BindingResult br, @ModelAttribute(name="ids") String ids, Model model, @RequestParam("imagen") MultipartFile imagen) {
 		
 		if(br.hasErrors()) {
 			model.addAttribute("generos", generoService.findAll());
 	        model.addAttribute("actores", actorService.findAll());
 	        model.addAttribute("titulo", "Nueva Película");
 			return "pelicula";
+		}
+		if(!imagen.isEmpty()) {
+			String archivo = pelicula.getNombre() + 
 		}
 		List<Integer> idsProtagonistas = Arrays.stream(ids.split(",")).map(Integer::parseInt).collect(Collectors.toList());
 		List<Actor> protagonistas = (List<Actor>) actorService.findAllById(idsProtagonistas);
