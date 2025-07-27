@@ -1,5 +1,6 @@
 package com.mvc.archMVC.controllers;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -76,13 +77,23 @@ public class PeliculaController {
 			return "pelicula";
 		}
 		if(!imagen.isEmpty()) {
-			String archivo = pelicula.getNombre() + 
+			String archivo = pelicula.getNombre() + getExtension(imagen.getOriginalFilename());
+			try {
+				archivoService.guardar(archivo, imagen.getInputStream());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		List<Integer> idsProtagonistas = Arrays.stream(ids.split(",")).map(Integer::parseInt).collect(Collectors.toList());
 		List<Actor> protagonistas = (List<Actor>) actorService.findAllById(idsProtagonistas);
 		pelicula.setProtagonista(protagonistas);
 		peliculaService.create(pelicula);
 		return "redirect:/home";
+	}
+	
+	private String getExtension(String archivo) {
+		return archivo.substring(archivo.lastIndexOf("."));
 	}
 	
 	@GetMapping({"/", "/home", "/index"})
