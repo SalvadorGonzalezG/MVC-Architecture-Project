@@ -11,6 +11,8 @@ public interface IArchivoService {
 	// method save
 	public void guardar(String archivo, InputStream bytes);
 	
+	public void eliminar(String archivo);
+	
 	// Devuelve un reponseEntity y recibe el nombre del archivo
 	public ResponseEntity<Resource> get(String archivo);
 	

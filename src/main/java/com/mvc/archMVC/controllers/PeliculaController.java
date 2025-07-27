@@ -68,7 +68,7 @@ public class PeliculaController {
 	}
 	
 	@PostMapping("/pelicula")
-	public String guardar(@Valid Pelicula pelicula, BindingResult br, @ModelAttribute(name="ids") String ids, Model model, @RequestParam("imagen") MultipartFile imagen) {
+	public String guardar(@Valid Pelicula pelicula, BindingResult br, @ModelAttribute(name="ids") String ids, Model model, @RequestParam("archivo") MultipartFile imagen) {
 		
 		if(br.hasErrors()) {
 			model.addAttribute("generos", generoService.findAll());
@@ -78,12 +78,15 @@ public class PeliculaController {
 		}
 		if(!imagen.isEmpty()) {
 			String archivo = pelicula.getNombre() + getExtension(imagen.getOriginalFilename());
+			pelicula.setImagen(archivo);
 			try {
 				archivoService.guardar(archivo, imagen.getInputStream());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else {
+			pelicula.setImagen("_default.jpg");
 		}
 		List<Integer> idsProtagonistas = Arrays.stream(ids.split(",")).map(Integer::parseInt).collect(Collectors.toList());
 		List<Actor> protagonistas = (List<Actor>) actorService.findAllById(idsProtagonistas);
@@ -99,8 +102,8 @@ public class PeliculaController {
 	@GetMapping({"/", "/home", "/index"})
 	public String home(Model model) {
 		model.addAttribute("peliculas", peliculaService.findAll());
-		model.addAttribute("msj", "Catalogo");
-		model.addAttribute("tipoMsj", "success");
+		//model.addAttribute("msj", "Catalogo");
+		//model.addAttribute("tipoMsj", "success");
 		return "home";
 	}
 	

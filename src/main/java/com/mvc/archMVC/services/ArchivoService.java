@@ -17,11 +17,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArchivoService implements IArchivoService{
 
+	//Metodo para guardar un archivo como InputStream en una ruta local
 	@Override
 	public void guardar(String archivo, InputStream bytes) {
 		try {
+			eliminar(archivo);
+	// Se copia el contenido del InpurStream en una ruta local
 			Files.copy(bytes, resolvePath(archivo));
 		}catch(IOException e) {
+	// Imprime la excepcion en caso de error
 			e.printStackTrace();
 		}
 	}
@@ -39,6 +43,15 @@ public class ArchivoService implements IArchivoService{
 				.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; file\"" + resource.getFilename() + "\"" )
 				.body(resource);
+	}
+	
+	public void  eliminar(String archivo) {
+		try {
+			Files.deleteIfExists(resolvePath(archivo));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private Path resolvePath(String archivo) {
