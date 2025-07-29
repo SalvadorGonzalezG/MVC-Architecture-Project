@@ -89,7 +89,7 @@ public class PeliculaController {
 			pelicula.setImagen("_default.jpg");
 		}
 		
-		if(ids != null && ids != "") {
+		if(ids != null && !ids.isBlank()) {
 			List<Integer> idsProtagonistas = Arrays.stream(ids.split(",")).map(Integer::parseInt).collect(Collectors.toList());
 			List<Actor> protagonistas = (List<Actor>) actorService.findAllById(idsProtagonistas);
 			pelicula.setProtagonista(protagonistas);
