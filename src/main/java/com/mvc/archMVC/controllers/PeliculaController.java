@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mvc.archMVC.entities.Actor;
 import com.mvc.archMVC.entities.Pelicula;
@@ -111,10 +112,24 @@ public class PeliculaController {
 	}
 	
 	@GetMapping("/listado")
-	public String listado(Model model) {
+	public String listado(Model model, @RequestParam(required = false ) String msj, @RequestParam(required = false) String tipoMsj) {
 		model.addAttribute("titulo", "Todas las Peliculas");
 		model.addAttribute("peliculas", peliculaService.findAll());
+		
+		if("".equals(tipoMsj) && !"".equals(msj)) {
+			model.addAttribute("msj", msj);
+			model.addAttribute("tipoMsj", tipoMsj);
+		}
 		return "listado";
+	}
+	
+	@GetMapping("/pelicula/{id}/delete")
+	public String eliminar(@PathVariable (name="id") int id, Model model, RedirectAttributes redirectAtt) {
+		peliculaService.delete(id);
+		
+		redirectAtt.addAttribute("msj", "La pelicula Se a eliminado");
+		redirectAtt.addAttribute("tipoMsj", "Success");
+		return "redirect:/listado";
 	}
 	
 	
