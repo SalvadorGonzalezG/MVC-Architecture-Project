@@ -88,9 +88,12 @@ public class PeliculaController {
 		} else {
 			pelicula.setImagen("_default.jpg");
 		}
-		List<Integer> idsProtagonistas = Arrays.stream(ids.split(",")).map(Integer::parseInt).collect(Collectors.toList());
-		List<Actor> protagonistas = (List<Actor>) actorService.findAllById(idsProtagonistas);
-		pelicula.setProtagonista(protagonistas);
+		
+		if(ids != null && ids != "") {
+			List<Integer> idsProtagonistas = Arrays.stream(ids.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+			List<Actor> protagonistas = (List<Actor>) actorService.findAllById(idsProtagonistas);
+			pelicula.setProtagonista(protagonistas);
+		}
 		peliculaService.create(pelicula);
 		return "redirect:/home";
 	}
@@ -111,7 +114,7 @@ public class PeliculaController {
 	public String listado(Model model) {
 		model.addAttribute("titulo", "Todas las Peliculas");
 		model.addAttribute("peliculas", peliculaService.findAll());
-		return "home";
+		return "listado";
 	}
 	
 	
