@@ -58,11 +58,11 @@ public class PeliculaController {
 	}
 	@GetMapping("/pelicula/{id}")
 	public String editar(@PathVariable (name="id") int id, Model model) {
-		Pelicula pelicula = new Pelicula();
+		Pelicula pelicula = peliculaService.findById(id);
 		model.addAttribute("pelicula", pelicula);
 		model.addAttribute("generos", generoService.findAll());
 		model.addAttribute("actores", actorService.findAll());
-		model.addAttribute("pelicula", peliculaService.findById(id));
+		//model.addAttribute("pelicula", peliculaService.findById(id));
 		model.addAttribute("titulo", "Editar Pelicula");
 		return "pelicula";
 	}
@@ -104,6 +104,13 @@ public class PeliculaController {
 		model.addAttribute("peliculas", peliculaService.findAll());
 		//model.addAttribute("msj", "Catalogo");
 		//model.addAttribute("tipoMsj", "success");
+		return "home";
+	}
+	
+	@GetMapping("/listado")
+	public String listado(Model model) {
+		model.addAttribute("titulo", "Todas las Peliculas");
+		model.addAttribute("peliculas", peliculaService.findAll());
 		return "home";
 	}
 	
